@@ -14,10 +14,56 @@
             <p>PRODUCT MANAGMENT SYSTEM</p>
         </div>
         <div class="input">
-
+            <input placeholder="title" type="text" id="title">
+               <div class="price">
+                   <input placeholder="taxes" type="number" id="price">
+                   <input placeholder="taxes" type="number" id="price">
+                   <input placeholder="ads" type="number" id="ads">
+                   <input placeholder="discount" type="number" id="discount">
+                   <small id="total"></small>
+               </div>
+            <input placeholder="count" type="number" id="count">
+            <input placeholder="category" type="text" id="category">
+            <button id="submit">Create</button>
         </div>
-        <div class="output">
 
+        <div class="output">
+                <div class="searchBlock">
+                   <input type="text" id="search" placeholder="Search">
+                    <div class="btnSearch">
+                       <button id="searchTitle">Search By Title</button>
+                       <button id="searchCategory"> Search By Category</button>
+                    </div>
+               </div>
+
+                <table>
+                    <tr>
+                        <th>id</th>
+                        <th>title</th>
+                        <th>taxes</th>
+                        <th>price</th>
+                        <th>ads</th>
+                        <th>discount</th>
+                        <th>total  </th>
+                        <th>category</th>
+                        <th>update</th>
+                        <th>delete</th>
+                    </tr>
+                    <tbody>
+                        <tr>
+                                <td>1</td>
+                                <td>samsung</td>
+                                <td>2000</td>
+                                <td>100</td>
+                                <td>150</td>
+                                <td>100</td>
+                                <td>phone</td>
+                                <td>1</td>
+                                <td><button id="update">update</button></td>
+                                <td><button id="delete">delete</button></td>
+                        </tr>
+                    </tbody>
+                </table>
         </div>
     
     </div>

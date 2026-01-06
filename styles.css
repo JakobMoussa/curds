@@ -32,6 +32,10 @@ input {
     color: #fff;
 
 }
+.price {
+    display: flex;
+    gap: 10px;
+}
 
 input:focus {
     background: #000;
@@ -70,3 +74,17 @@ button:hover {
 .btnSearch button {
     width: 45%;
 }
+
+table {
+    width: 100%;
+    text-align: center;
+    margin: 10px 2px 0;
+}
+table th {
+    text-transform: uppercase;
+}
+
+tr, td {
+    padding: 5px;
+}
+
