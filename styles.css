@@ -20,6 +20,9 @@ body {
     margin: 10px 0;
 }
 
+.deleteAll {
+    margin: 20px, 0;
+}
 input {
     width: 100%;
     height: 30px;
