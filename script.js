@@ -9,6 +9,8 @@ let category = document.getElementById('category');
 let submit = document.getElementById('submit');
 let tbody = document.getElementById('tbody');
 
+let mood = 'create';
+
 function getTotal() {
     if (price.value != '') {
         let result = (+price.value + +taxes.value + +ads.value) 
@@ -42,13 +44,21 @@ submit.onclick = function() {
         category:category.value
     }
 
-    if (newPro.count > 1) {
-        for (let i = 0; i < newPro.count; i++) {
+    if (mood === 'create') {
+        if (newPro.count > 1) {
+            for (let i = 0; i < newPro.count; i++) {
+            dataPro.push(newPro);
+            }
+        }else {
             dataPro.push(newPro);
         }
     }else {
-        dataPro.push(newPro);
+        dataPro[ tmp ] = newPro;
+        mood = 'create';
+        submit.innerHTML = 'create';
+        count.style.display = 'block';
     }
+
     localStorage.setItem('product', JSON.stringify(dataPro))
     clearData();
     showData();
@@ -79,7 +89,7 @@ function showData() {
                                 <td>${dataPro[i].discount}</td>
                                 <td>${dataPro[i].total}</td>
                                 <td>${dataPro[i].category}</td>
-                                <td><button id="update">update</button></td>
+                                <td><button id="update" onclick="updateData(${i})">update</button></td>
                                 <td><button id="delete" onclick="deleteData(${i})">delete</button></td>
                         </tr>`
     }
@@ -107,4 +117,24 @@ function deleteAll() {
     localStorage.clear();
     dataPro.splice(0);
     showData();
+}
+
+
+function updateData(i) {
+    title.value = dataPro[i].title;
+    taxes.value = dataPro[i].taxes;
+    price.value = dataPro[i].price;
+    ads.value = dataPro[i].ads;
+    discount.value = dataPro[i].discount;
+    category.value = dataPro[i].category;
+    getTotal();
+    count.style.display = 'none';
+    mood = 'update';
+    submit.innerHTML = 'update';
+    tmp = i;
+    scroll({
+        top: 0,
+        behavior: 'smooth',
+    })
+     
 }
