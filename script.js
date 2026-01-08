@@ -34,7 +34,7 @@ if(localStorage.product != null) {
 
 submit.onclick = function() {
     let newPro = {
-        title:title.value,
+        title:title.value.toLowerCase(),
         price:price.value,
         taxes:taxes.value,
         ads:ads.value,
@@ -64,7 +64,6 @@ submit.onclick = function() {
     showData();
 
 }
-
 
 function clearData() {
     title.value = '';
@@ -106,7 +105,6 @@ function showData() {
 
 showData();
 
-
 function deleteData(i) {
 dataPro.splice(i,1);
 localStorage.product = JSON.stringify(dataPro);
@@ -118,7 +116,6 @@ function deleteAll() {
     dataPro.splice(0);
     showData();
 }
-
 
 function updateData(i) {
     title.value = dataPro[i].title;
@@ -137,4 +134,62 @@ function updateData(i) {
         behavior: 'smooth',
     })
      
+}
+
+let searchMood = 'title';
+
+function getSearchMood(id) {
+    let search = document.getElementById('search');
+    
+    if (id == 'searchTitle') {
+        searchMood = 'title';
+        search.placeholder = 'Search By Title'
+    } else {
+        searchMood = 'category';
+        search.placeholder = 'Search By gategory'
+    }
+    search.placeholder = 'search By'+ searchMood;
+    search.focus();
+    search.value = '';
+    showData();    
+}
+
+function searchData(value) {
+    let table = '';
+    for(let i = 0; i < dataPro.length; i++) {
+        if (searchMood == 'title') {
+            if (dataPro[i].title.includes(value.toLowerCase())) {
+                        table += `      <tr>
+                                <td>${i}</td>
+                                <td>${dataPro[i].title}</td>
+                                <td>${dataPro[i].price}</td>
+                                <td>${dataPro[i].taxes}</td>
+                                <td>${dataPro[i].ads}</td>
+                                <td>${dataPro[i].discount}</td>
+                                <td>${dataPro[i].total}</td>
+                                <td>${dataPro[i].category}</td>
+                                <td><button id="update" onclick="updateData(${i})">update</button></td>
+                                <td><button id="delete" onclick="deleteData(${i})">delete</button></td>
+                        </tr>`
+            }
+        } else {
+            if (dataPro[i].category.includes(value.toLowerCase())) {
+                        table += `      <tr>
+                                <td>${i}</td>
+                                <td>${dataPro[i].title}</td>
+                                <td>${dataPro[i].price}</td>
+                                <td>${dataPro[i].taxes}</td>
+                                <td>${dataPro[i].ads}</td>
+                                <td>${dataPro[i].discount}</td>
+                                <td>${dataPro[i].total}</td>
+                                <td>${dataPro[i].category}</td>
+                                <td><button id="update" onclick="updateData(${i})">update</button></td>
+                                <td><button id="delete" onclick="deleteData(${i})">delete</button></td>
+                        </tr>`
+            }
+        }
+    
+        document.getElementById('tbody').innerHTML = table;
+    
+    }
 }
