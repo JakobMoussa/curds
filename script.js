@@ -32,40 +32,49 @@ if(localStorage.product != null) {
     dataPro = [];
 }
 
-submit.onclick = function() {
-    let newPro = {
-        title:title.value.toLowerCase(),
-        price:price.value,
-        taxes:taxes.value,
-        ads:ads.value,
-        discount:discount.value,
-        total:total.innerHTML,
-        count:count.value,
-        category:category.value
+submit.onclick = function () {
+    if (
+        title.value === '' ||
+        price.value === '' ||
+        category.value === '' ||
+        count.value === '' ||
+        count.value > 100
+    ) {
+        alert('Bitte alle Felder korrekt ausfüllen (Count max. 100)');
+        return;
     }
-if (title.value != ''
-    && price.value != ''
-    && category.value != '') {
+
+    let newPro = {
+        title: title.value.toLowerCase(),
+        price: price.value,
+        taxes: taxes.value,
+        ads: ads.value,
+        discount: discount.value,
+        total: total.innerHTML,
+        count: count.value,
+        category: category.value
+    };
+
     if (mood === 'create') {
         if (newPro.count > 1) {
             for (let i = 0; i < newPro.count; i++) {
-            dataPro.push(newPro);
+                dataPro.push(newPro);
             }
-        }else {
+        } else {
             dataPro.push(newPro);
         }
-    }else {
-        dataPro[ tmp ] = newPro;
+    } else {
+        dataPro[tmp] = newPro;
         mood = 'create';
         submit.innerHTML = 'create';
         count.style.display = 'block';
     }
-}
-    localStorage.setItem('product', JSON.stringify(dataPro))
+
+    localStorage.setItem('product', JSON.stringify(dataPro));
     clearData();
     showData();
-
 }
+
 
 function clearData() {
     title.value = '';
@@ -80,7 +89,7 @@ function clearData() {
 
 function showData() {
     let table = '';
-    for(let i = 0; i < dataPro.length;i++) {
+    for(let i = 1; i < dataPro.length;i++) {
         table += `      <tr>
                                 <td>${i}</td>
                                 <td>${dataPro[i].title}</td>
