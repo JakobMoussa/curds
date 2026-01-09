@@ -43,7 +43,9 @@ submit.onclick = function() {
         count:count.value,
         category:category.value
     }
-
+if (title.value != ''
+    && price.value != ''
+    && category.value != '') {
     if (mood === 'create') {
         if (newPro.count > 1) {
             for (let i = 0; i < newPro.count; i++) {
@@ -58,7 +60,7 @@ submit.onclick = function() {
         submit.innerHTML = 'create';
         count.style.display = 'block';
     }
-
+}
     localStorage.setItem('product', JSON.stringify(dataPro))
     clearData();
     showData();
@@ -96,7 +98,7 @@ function showData() {
     let btnDelete = document.getElementById('deleteAll');
     if (dataPro.length > 0) {
         btnDelete.innerHTML = `
-        <button Onclick="deleteAll()">Delete all (${dataPro.length})</button>
+        <button Onclick="deleteAll()" class="removeData">Delete all (${dataPro.length})</button>
         `
     }else {
         btnDelete.innerHTML = '';
@@ -118,6 +120,7 @@ function deleteAll() {
 }
 
 function updateData(i) {
+
     title.value = dataPro[i].title;
     taxes.value = dataPro[i].taxes;
     price.value = dataPro[i].price;
@@ -155,7 +158,6 @@ function getSearchMood(id) {
 }
 
 function searchData(value) {
-    let table = '';
     for(let i = 0; i < dataPro.length; i++) {
         if (searchMood == 'title') {
             if (dataPro[i].title.includes(value.toLowerCase())) {
@@ -172,8 +174,10 @@ function searchData(value) {
                                 <td><button id="delete" onclick="deleteData(${i})">delete</button></td>
                         </tr>`
             }
-        } else {
-            if (dataPro[i].category.includes(value.toLowerCase())) {
+        } 
+
+        else {
+                if (dataPro[i].category.includes(value.toLowerCase())) {
                         table += `      <tr>
                                 <td>${i}</td>
                                 <td>${dataPro[i].title}</td>
@@ -188,8 +192,7 @@ function searchData(value) {
                         </tr>`
             }
         }
-    
-        document.getElementById('tbody').innerHTML = table;
-    
     }
+
+     document.getElementById('tbody').innerHTML = table;
 }
